@@ -11,7 +11,6 @@ import { BudgetPlanner } from './components/budget/BudgetPlanner';
 import { AnalyticsView } from './components/analytics/AnalyticsView';
 import { SavingsGoalsView } from './components/goals/SavingsGoalsView';
 import { AICoachChat } from './components/ai/AICoachChat';
-import { AIVisionBoard } from './components/ai/AIVisionBoard';
 import { BusinessModeView } from './components/business/BusinessModeView';
 import { Plus } from 'lucide-react';
 
@@ -19,7 +18,7 @@ function DashboardContent() {
   const { currentUser } = useAuth();
 
   const [activeTab, setActiveTab] = useState<
-    'dashboard' | 'transactions' | 'budget' | 'analytics' | 'goals' | 'aicoach' | 'vision' | 'business'
+    'dashboard' | 'transactions' | 'budget' | 'analytics' | 'goals' | 'aicoach' | 'business'
   >('dashboard');
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(!currentUser);
@@ -63,8 +62,6 @@ function DashboardContent() {
           {activeTab === 'goals' && <SavingsGoalsView />}
 
           {activeTab === 'aicoach' && <AICoachChat />}
-
-          {activeTab === 'vision' && <AIVisionBoard />}
 
           {activeTab === 'business' && <BusinessModeView />}
         </main>

@@ -79,7 +79,7 @@ export const BudgetPlanner: React.FC = () => {
             Category Budget Limits & Planner
           </h2>
           <p className="text-xs text-slate-500 mt-1">
-            Set custom spending thresholds or let Gemini AI optimize starter budgets based on your profile.
+            Set custom spending thresholds or let Savorah AI optimize starter budgets based on your profile.
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export const BudgetPlanner: React.FC = () => {
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-emerald-600" />
             <h3 className="text-sm font-extrabold text-emerald-950">
-              Gemini Recommended Budget Allocation applied for {persona.toUpperCase()}!
+              Savorah AI Recommended Budget Allocation applied for {persona.toUpperCase()}!
             </h3>
           </div>
           {aiResult.topAdvice && (

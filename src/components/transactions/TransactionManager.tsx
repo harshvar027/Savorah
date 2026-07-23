@@ -388,7 +388,7 @@ export const TransactionManager: React.FC<TransactionManagerProps> = ({
                     onClick={handleAICategorize}
                     disabled={aiAutoCategorizing || !title.trim()}
                     className="py-2 px-3 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-xs font-extrabold flex items-center gap-1.5 shrink-0 transition-all"
-                    title="Auto detect category and tags with Gemini AI"
+                    title="Auto detect category and tags with Savorah AI"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                     {aiAutoCategorizing ? 'AI...' : 'Auto-Tag'}

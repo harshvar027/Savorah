@@ -7,7 +7,6 @@ import {
   Target,
   Sparkles,
   Sliders,
-  Image as ImageIcon,
   Building2,
 } from 'lucide-react';
 
@@ -17,7 +16,6 @@ export type ActiveTab =
   | 'budget'
   | 'analytics'
   | 'aicoach'
-  | 'vision'
   | 'goals'
   | 'business';
 
@@ -33,7 +31,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onSelectTab }) => {
     { id: 'budget', label: 'Budget Planner', icon: Sliders },
     { id: 'analytics', label: 'Analytics', icon: PieChart },
     { id: 'aicoach', label: 'AI Coach', icon: Bot, badge: 'AI' },
-    { id: 'vision', label: 'AI Vision', icon: ImageIcon },
     { id: 'goals', label: 'Goals', icon: Target },
     { id: 'business', label: 'Business', icon: Building2, badge: 'B2B' },
   ];

@@ -69,19 +69,19 @@ export const BusinessModeView: React.FC = () => {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Top Banner */}
-      <div className="p-6 rounded-3xl bg-slate-900 text-white shadow-xl shadow-slate-950/20 space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
-            <Building2 className="w-3.5 h-3.5" />
+      <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-800 via-teal-800 to-emerald-900 text-white shadow-xl shadow-emerald-950/15 space-y-3 relative overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-emerald-200 text-xs font-bold">
+            <Building2 className="w-3.5 h-3.5 text-emerald-300" />
             BUSINESS & ENTERPRISE CASH FLOW MONITORING
           </div>
-          <span className="text-xs text-slate-400 font-mono">Real-Time Operational Engine</span>
+          <span className="text-xs text-emerald-200/80 font-mono">Real-Time Operational Engine</span>
         </div>
 
         <h2 className="text-2xl font-extrabold tracking-tight text-white">
           Enterprise Operations & Runway Dashboard
         </h2>
-        <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+        <p className="text-xs text-emerald-100/90 max-w-2xl leading-relaxed">
           Monitor operational costs, vendor accounts payable, cash burn rate, and real-time cash flow runway for your organization.
         </p>
       </div>

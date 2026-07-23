@@ -22,7 +22,7 @@ export const AICoachChat: React.FC = () => {
     {
       id: 'msg-1',
       sender: 'ai',
-      text: `Hello ${currentUser?.name || 'there'}! I am your Savorah Gemini AI Financial Coach. How can I help you optimize your budgets, tax strategies, or daily spending today?`,
+      text: `Hello ${currentUser?.name || 'there'}! I am your Savorah AI Financial Coach. How can I help you optimize your budgets, tax strategies, or daily spending today?`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -100,7 +100,7 @@ export const AICoachChat: React.FC = () => {
         {
           id: `msg-err-${Date.now()}`,
           sender: 'ai',
-          text: 'Network error communicating with Savorah Gemini server. Please try again.',
+          text: 'Network error communicating with Savorah AI server. Please try again.',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         },
       ]);
@@ -119,7 +119,7 @@ export const AICoachChat: React.FC = () => {
               <Bot className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">
-              Savorah Gemini Financial Coach
+              Savorah AI Financial Coach
             </h2>
           </div>
           <p className="text-xs text-slate-500 mt-1">
@@ -140,7 +140,7 @@ export const AICoachChat: React.FC = () => {
                 ? 'bg-purple-100 text-purple-900 border-purple-300 shadow-sm'
                 : 'bg-white/80 text-slate-600 border-slate-200'
             }`}
-            title="Enable High Reasoning Thinking Mode with gemini-3.1-pro-preview"
+            title="Enable High Reasoning Thinking Mode for complex financial strategy"
           >
             <Brain className="w-3.5 h-3.5 text-purple-600" />
             High Thinking {enableThinking && 'ON'}
@@ -154,10 +154,10 @@ export const AICoachChat: React.FC = () => {
                 ? 'bg-blue-100 text-blue-900 border-blue-300 shadow-sm'
                 : 'bg-white/80 text-slate-600 border-slate-200'
             }`}
-            title="Enable Google Search Grounding for live financial web data"
+            title="Enable Web Search Grounding for live financial data"
           >
             <Globe className="w-3.5 h-3.5 text-blue-600" />
-            Google Search {enableSearch && 'ON'}
+            Web Search {enableSearch && 'ON'}
           </button>
 
           {/* Low Latency Toggle */}
@@ -171,7 +171,7 @@ export const AICoachChat: React.FC = () => {
                 ? 'bg-amber-100 text-amber-900 border-amber-300 shadow-sm'
                 : 'bg-white/80 text-slate-600 border-slate-200'
             }`}
-            title="Enable Low Latency mode with gemini-3.1-flash-lite"
+            title="Enable Ultra-fast Low Latency mode"
           >
             <Zap className="w-3.5 h-3.5 text-amber-600" />
             Fast Lite {enableLowLatency && 'ON'}
@@ -248,7 +248,7 @@ export const AICoachChat: React.FC = () => {
           {loading && (
             <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold p-2">
               <div className="w-4 h-4 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-              Savorah Gemini AI is reasoning...
+              Savorah AI is reasoning...
             </div>
           )}
         </div>

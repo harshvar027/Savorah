@@ -64,7 +64,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
     const saved = localStorage.getItem('savorah_user');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.error(e); }
+      try {
+        const u = JSON.parse(saved);
+        if (u.name === 'Google User') u.name = 'Chandresh Sabhadiya';
+        return u;
+      } catch (e) { console.error(e); }
     }
     // Default logged in as Student demo user to show immediate dashboard
     return DEFAULT_USERS.student;
@@ -123,9 +127,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Simulate Google Sign-In
     const googleUser: User = {
       id: `usr-google-${Date.now()}`,
-      name: 'Google User',
-      email: 'user@gmail.com',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=GoogleUser&backgroundColor=b6e3f4,c0aede',
+      name: 'Chandresh Sabhadiya',
+      email: 'sabhadiyachandresh3@gmail.com',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Chandresh&backgroundColor=b6e3f4,c0aede',
       persona: 'professional',
       monthlyIncome: 6000,
       currency: '$',
