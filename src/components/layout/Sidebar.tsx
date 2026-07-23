@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   LayoutDashboard,
-  Receipt,
   PieChart,
   Bot,
   Target,
@@ -12,7 +11,6 @@ import {
 
 export type ActiveTab =
   | 'dashboard'
-  | 'transactions'
   | 'budget'
   | 'analytics'
   | 'aicoach'
@@ -27,7 +25,6 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onSelectTab }) => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'transactions', label: 'Transactions', icon: Receipt },
     { id: 'budget', label: 'Budget Planner', icon: Sliders },
     { id: 'analytics', label: 'Analytics', icon: PieChart },
     { id: 'aicoach', label: 'AI Coach', icon: Bot, badge: 'AI' },
