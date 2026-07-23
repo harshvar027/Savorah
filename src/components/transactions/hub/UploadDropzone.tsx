@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Upload, File, X, Camera, ImageIcon } from 'lucide-react';
+import { CameraCapture } from '../../shared/CameraCapture';
 
 interface UploadDropzoneProps {
   onFileSelect: (file: File) => void;
@@ -24,6 +25,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
   previewUrl,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -49,47 +51,64 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
     e.target.value = '';
   };
 
+  const handleCameraCapture = (capturedFile: File) => {
+    onFileSelect(capturedFile);
+  };
+
   if (file) {
     return (
-      <motion.div
-        initial={{ scale: 0.96, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="rounded-2xl border border-emerald-200 bg-emerald-50 overflow-hidden"
-      >
-        {previewUrl && file.type.startsWith('image/') && (
-          <div className="relative">
-            <img src={previewUrl} alt="Receipt preview" className="w-full max-h-40 object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent" />
-            <div className="absolute bottom-2 left-3">
-              <span className="text-white text-[10px] font-bold bg-emerald-600/80 px-2 py-0.5 rounded-lg backdrop-blur-sm">
-                Preview
-              </span>
+      <>
+        <motion.div
+          initial={{ scale: 0.96, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="rounded-2xl border border-emerald-200 bg-emerald-50 overflow-hidden"
+        >
+          {previewUrl && file.type.startsWith('image/') && (
+            <div className="relative">
+              <img src={previewUrl} alt="Receipt preview" className="w-full max-h-40 object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent" />
+              <div className="absolute bottom-2 left-3">
+                <span className="text-white text-[10px] font-bold bg-emerald-600/80 px-2 py-0.5 rounded-lg backdrop-blur-sm">
+                  Preview
+                </span>
+              </div>
             </div>
-          </div>
-        )}
-        <div className="flex items-center gap-3 p-3">
-          <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-            {file.type.startsWith('image/') ? (
-              <ImageIcon className="w-4 h-4 text-emerald-600" />
-            ) : (
-              <File className="w-4 h-4 text-emerald-600" />
+          )}
+          <div className="flex items-center gap-3 p-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
+              {file.type.startsWith('image/') ? (
+                <ImageIcon className="w-4 h-4 text-emerald-600" />
+              ) : (
+                <File className="w-4 h-4 text-emerald-600" />
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-slate-800 truncate">{file.name}</p>
+              <p className="text-[10px] text-emerald-600 font-medium">
+                {(file.size / 1024).toFixed(1)} KB · Ready to process
+              </p>
+            </div>
+            {onClear && (
+              <button
+                onClick={onClear}
+                className="p-1.5 rounded-lg hover:bg-emerald-100 text-slate-400 hover:text-slate-600 transition-all"
+                aria-label="Remove file"
+              >
+                <X className="w-4 h-4" />
+              </button>
             )}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-slate-800 truncate">{file.name}</p>
-            <p className="text-[10px] text-emerald-600 font-medium">{(file.size / 1024).toFixed(1)} KB · Ready to process</p>
-          </div>
-          {onClear && (
-            <button
-              onClick={onClear}
-              className="p-1.5 rounded-lg hover:bg-emerald-100 text-slate-400 hover:text-slate-600 transition-all"
-              aria-label="Remove file"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
-      </motion.div>
+        </motion.div>
+
+        <CameraCapture
+          isOpen={cameraOpen}
+          onCapture={handleCameraCapture}
+          onClose={() => setCameraOpen(false)}
+          facingMode="environment"
+          title="Scan Receipt"
+          hint="Position the receipt clearly in frame, then capture."
+        />
+      </>
     );
   }
 
@@ -142,15 +161,21 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                inputRef.current?.click();
+              }}
               className="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-[11px] font-bold hover:bg-emerald-500 transition-colors shadow-sm shadow-emerald-600/20"
             >
               Browse Files
             </button>
             <button
               type="button"
-              onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
-              className="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-600 text-[11px] font-bold hover:bg-slate-200 transition-colors flex items-center gap-1.5"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCameraOpen(true);
+              }}
+              className="px-3 py-1.5 rounded-xl bg-slate-800 text-white text-[11px] font-bold hover:bg-slate-700 transition-colors flex items-center gap-1.5 shadow-sm"
             >
               <Camera className="w-3.5 h-3.5" />
               Camera
@@ -166,6 +191,16 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           </div>
         </div>
       </motion.div>
+
+      {/* Live camera capture modal */}
+      <CameraCapture
+        isOpen={cameraOpen}
+        onCapture={handleCameraCapture}
+        onClose={() => setCameraOpen(false)}
+        facingMode="environment"
+        title="Scan Receipt"
+        hint="Position the receipt clearly in frame, then capture."
+      />
     </div>
   );
 };
