@@ -244,9 +244,9 @@ export const TransactionManager: React.FC<TransactionManagerProps> = ({
       </div>
 
       {/* Transaction Table */}
-      <div className="p-6 rounded-3xl bg-white/80 backdrop-blur-xl border border-emerald-500/15 shadow-xl shadow-emerald-950/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+      <div className="p-4 sm:p-6 rounded-3xl bg-white/80 backdrop-blur-xl border border-emerald-500/15 shadow-xl shadow-emerald-950/5">
+        <div className="overflow-x-auto custom-scrollbar">
+          <table className="w-full text-left text-xs min-w-[580px]">
             <thead>
               <tr className="border-b border-slate-100 text-slate-400 uppercase text-[10px] tracking-wider">
                 <th className="pb-3 font-bold">Transaction</th>

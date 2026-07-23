@@ -36,12 +36,12 @@ function DashboardContent() {
       />
 
       {/* Main Body with Sidebar + Content */}
-      <div className="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 gap-4 lg:gap-6">
         {/* Navigation Sidebar */}
         <Sidebar activeTab={activeTab} onSelectTab={setActiveTab} />
 
         {/* View Content Area */}
-        <main className="flex-1 min-w-0 pb-16">
+        <main className="flex-1 min-w-0 pb-20 lg:pb-16">
           {activeTab === 'dashboard' && (
             <AdaptiveDashboard
               onNavigateTab={(tab) => setActiveTab(tab)}

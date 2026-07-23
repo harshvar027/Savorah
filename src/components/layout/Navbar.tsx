@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useFinance } from '../../context/FinanceContext';
 import { UserPersona } from '../../types';
@@ -14,6 +14,8 @@ import {
   Sparkles,
   User as UserIcon,
   ShieldCheck,
+  Menu,
+  X,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -31,10 +33,32 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { notifications } = useFinance();
 
   const [personaDropdownOpen, setPersonaDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const currentPersona = currentUser?.persona || 'professional';
+
+  // Click outside & Escape key listeners
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setPersonaDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setPersonaDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const getPersonaBadge = (persona: UserPersona) => {
     switch (persona) {
@@ -76,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center: Persona Switcher Badge */}
-        <div className="relative">
+        <div ref={dropdownRef} className="relative">
           <button
             onClick={() => setPersonaDropdownOpen(!personaDropdownOpen)}
             className={`flex items-center gap-2 py-1.5 px-3 rounded-2xl border text-xs font-bold transition-all shadow-sm ${badge.color} hover:opacity-90`}
@@ -180,9 +204,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-2 p-1 rounded-2xl bg-white/80 border border-emerald-500/20 hover:border-emerald-500/40 transition-all shadow-sm"
             >
               <img
-                src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250'}
+                src={currentUser.avatar || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Alex&backgroundColor=b6e3f4,c0aede'}
                 alt={currentUser.name}
-                className="w-8 h-8 rounded-xl object-cover"
+                className="w-8 h-8 rounded-xl object-cover bg-emerald-50"
               />
               <span className="hidden lg:inline text-xs font-bold text-slate-800 pr-1.5">
                 {currentUser.name.split(' ')[0]}
